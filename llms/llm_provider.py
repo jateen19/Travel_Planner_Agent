@@ -28,9 +28,6 @@ def get_groq_llm_with_fallback(temperature: float = 0.7) -> BaseChatModel:
                 temperature=temperature,
                 api_key=os.getenv("GROQ_API_KEY")
             )
-            # Lightweight sanity check to test if model works
-            llm.invoke("Say hello!")
-            print(f"[LLM] Using Groq model: {model_name}")
             return llm
         except RateLimitError:
             print(f"[LLM] Rate limit hit for model: {model_name}. Trying fallback...")
